@@ -20,7 +20,7 @@ class AdminMiddleware
         }
 
         if (!auth()->user()->isAdmin()) {
-            return redirect()->route('dashboard')->with('error', 'Unauthorized access.');
+            return redirect()->route('admin.dashboard')->with('error', 'Unauthorized access.');
         }
 
         return $next($request);
