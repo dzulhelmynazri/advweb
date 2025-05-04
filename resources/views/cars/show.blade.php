@@ -7,20 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Car Image -->
-                        <div>
-                            <img src="{{ $car->image_url ?? 'https://via.placeholder.com/600x400' }}"
-                                 alt="{{ $car->brand }} {{ $car->model }}"
-                                 class="w-full h-64 object-cover rounded-lg">
-                        </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border p-6 flex gap-4 justify-between">
 
-                        <!-- Car Details -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">{{ $car->brand }} {{ $car->model }}</h3>
                             <div class="space-y-2">
+                                <h3 class="text-2xl font-bold mb-2">{{ $car->brand }} {{ $car->model }}</h3>
                                 <p><span class="font-medium">Type:</span> {{ $car->carType->name }}</p>
                                 <p><span class="font-medium">Transmission:</span> {{ $car->transmission }}</p>
                                 <p><span class="font-medium">Plate Number:</span> {{ $car->plate_number }}</p>
@@ -39,7 +29,7 @@
                                     @csrf
                                     <input type="hidden" name="car_id" value="{{ $car->id }}">
 
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="flex-col gap-4">
                                         <div>
                                             <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
                                             <input type="date" name="start_date" id="start_date"
@@ -54,18 +44,16 @@
                                                    min="{{ date('Y-m-d', strtotime('+3 days')) }}"
                                                    required>
                                         </div>
+
+                                      <button type="submit" class="text-black p-4 w-full">
+                                                Book Now
+                                            </button>
                                     </div>
 
-                                    <div class="mt-4">
-                                        <button type="submit" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                            Book Now
-                                        </button>
-                                    </div>
+
                                 </form>
                             @endif
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

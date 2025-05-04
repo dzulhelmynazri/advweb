@@ -43,13 +43,9 @@
                         </select>
                     </div>
 
-
                         <button type="submit">
-
                         <x-bi-filter class="w-6 h-6"/>
-
                         </button>
-
                 </form>
             </div>
 
