@@ -22,7 +22,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     @if($bookings->count() > 0)
-                        <div class="overflow-x-auto">
+
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                     <tr>
@@ -37,7 +37,7 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach($bookings as $booking)
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap w-auto">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     {{ $booking->car->brand }} {{ $booking->car->model }}
                                                 </div>
@@ -45,21 +45,21 @@
                                                     {{ $booking->car->carType->name }}
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap w-auto">
                                                 <div class="text-sm text-gray-900">{{ $booking->car->branch->name }}</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap w-auto">
                                                 <div class="text-sm text-gray-900">
-                                                    {{ $booking->start_date->format('M d, Y') }} -<br>
+                                                    {{ $booking->start_date->format('M d, Y') }} -
                                                     {{ $booking->end_date->format('M d, Y') }}
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap w-auto">
                                                 <div class="text-sm text-gray-900">
                                                     RM{{ number_format($booking->total_price, 2) }}
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 whitespace-nowrap w-auto">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                                     @if($booking->status === 'pending') bg-yellow-100 text-yellow-800
                                                     @elseif($booking->status === 'approved') bg-green-100 text-green-800
@@ -76,7 +76,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
+
                         <div class="mt-4">
                             {{ $bookings->links() }}
                         </div>

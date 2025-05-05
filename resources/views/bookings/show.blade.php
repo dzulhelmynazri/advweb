@@ -12,37 +12,28 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Car Details -->
                         <div>
-                            <h3 class="text-lg font-semibold mb-4">Car Information</h3>
+                            <h3 class="text-lg font-semibold">Car Information</h3>
                             <div class="space-y-2">
-                                <p><span class="font-medium">Brand & Model:</span> {{ $booking->car->brand }} {{ $booking->car->model }}</p>
-                                <p><span class="font-medium">Type:</span> {{ $booking->car->carType->name }}</p>
-                                <p><span class="font-medium">Transmission:</span> {{ $booking->car->transmission }}</p>
-                                <p><span class="font-medium">Branch:</span> {{ $booking->car->branch->name }}</p>
-                                <p><span class="font-medium">Daily Rate:</span> RM{{ number_format($booking->car->daily_rate, 2) }}</p>
+                                <p><span class="font-medium">Brand & Model:</span> <span class="text-gray-500">{{ $booking->car->brand }} {{ $booking->car->model }}</span></p>
+                                <p><span class="font-medium">Type:</span> <span class="text-gray-500">{{ $booking->car->carType->name }}</span></p>
+                                <p><span class="font-medium">Transmission:</span> <span class="text-gray-500">{{ $booking->car->transmission }}</span></p>
+                                <p><span class="font-medium">Branch:</span> <span class="text-gray-500">{{ $booking->car->branch->name }}</span></p>
+                                <p><span class="font-medium">Daily Rate:</span> <span class="text-gray-500">RM{{ number_format($booking->car->daily_rate, 2) }}</span></p>
                             </div>
                         </div>
 
                         <!-- Booking Details -->
                         <div>
-                            <h3 class="text-lg font-semibold mb-4">Booking Information</h3>
+                            <h3 class="text-lg font-semibold mt-4">Booking Information</h3>
                             <div class="space-y-4">
-                                <div>
-                                    <p class="font-medium">Status</p>
-                                    <span class="inline-flex text-xs leading-5 font-semibold rounded-full mt-1
-                                        @if($booking->status === 'pending') bg-yellow-100 text-yellow-800
-                                        @elseif($booking->status === 'approved') bg-green-100 text-green-800
-                                        @elseif($booking->status === 'rejected') bg-red-100 text-red-800
-                                        @else bg-gray-100 text-gray-800
-                                        @endif">
-                                        {{ ucfirst($booking->status) }}
-                                    </span>
-                                </div>
+
+                                    <p class="font-medium">Status: <span class="text-gray-500"> {{ ucfirst($booking->status) }}</span> </p>
 
                                 <div>
-                                    <p class="font-medium">Rental Period</p>
-                                    <p class="text-gray-600">From: {{ $booking->start_date->format('M d, Y') }}</p>
-                                    <p class="text-gray-600">To: {{ $booking->end_date->format('M d, Y') }}</p>
-                                    <p class="text-gray-600">Duration: {{ $booking->start_date->diffInDays($booking->end_date) }} days</p>
+                                    <p class="font-medium">Rental Period: </p>
+                                    <p class="text-gray-500">From: {{ $booking->start_date->format('M d, Y') }}</p>
+                                    <p class="text-gray-500">To: {{ $booking->end_date->format('M d, Y') }}</p>
+                                    <p class="text-gray-500">Duration: {{ $booking->start_date->diffInDays($booking->end_date) }} days</p>
                                 </div>
 
                                 <div>
