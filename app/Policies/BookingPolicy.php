@@ -5,9 +5,12 @@ namespace App\Policies;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BookingPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
@@ -29,12 +32,7 @@ class BookingPolicy
      */
     public function create(User $user): bool
     {
-        // Check if user has less than 2 active bookings
-        $activeBookings = $user->bookings()
-            ->whereIn('status', ['pending', 'approved'])
-            ->count();
-
-        return $activeBookings < 2;
+        return true;
     }
 
     /**
@@ -42,7 +40,7 @@ class BookingPolicy
      */
     public function update(User $user, Booking $booking): bool
     {
-        return $user->isAdmin();
+        return $user->id === $booking->user_id || $user->isAdmin();
     }
 
     /**
@@ -50,7 +48,7 @@ class BookingPolicy
      */
     public function delete(User $user, Booking $booking): bool
     {
-        return $user->isAdmin();
+        return $user->id === $booking->user_id || $user->isAdmin();
     }
 
     /**

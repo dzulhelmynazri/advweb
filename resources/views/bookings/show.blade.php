@@ -13,11 +13,6 @@
                         <!-- Car Details -->
                         <div>
                             <h3 class="text-lg font-semibold mb-4">Car Information</h3>
-                            <div class="aspect-w-16 aspect-h-9 mb-4">
-                                <img src="{{ $booking->car->image_url ?? 'https://via.placeholder.com/600x400' }}"
-                                     alt="{{ $booking->car->brand }} {{ $booking->car->model }}"
-                                     class="w-full h-48 object-cover rounded-lg">
-                            </div>
                             <div class="space-y-2">
                                 <p><span class="font-medium">Brand & Model:</span> {{ $booking->car->brand }} {{ $booking->car->model }}</p>
                                 <p><span class="font-medium">Type:</span> {{ $booking->car->carType->name }}</p>
@@ -33,7 +28,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <p class="font-medium">Status</p>
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full mt-1
+                                    <span class="inline-flex text-xs leading-5 font-semibold rounded-full mt-1
                                         @if($booking->status === 'pending') bg-yellow-100 text-yellow-800
                                         @elseif($booking->status === 'approved') bg-green-100 text-green-800
                                         @elseif($booking->status === 'rejected') bg-red-100 text-red-800
