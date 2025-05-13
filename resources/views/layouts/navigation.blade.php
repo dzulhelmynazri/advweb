@@ -22,6 +22,9 @@
                         <x-nav-link :href="route('admin.cars.create')" :active="request()->routeIs('admin.cars.create')">
                             {{ __('Add Car') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.branches.index')" :active="request()->routeIs('admin.branches.*')">
+                            {{ __('Manage Branches') }}
+                        </x-nav-link>
                     @else
                         <x-nav-link :href="route('cars.index')" :active="request()->routeIs('cars.index')">
                             {{ __('Browse Cars') }}
@@ -103,6 +106,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.cars.create')" :active="request()->routeIs('admin.cars.create')">
                     {{ __('Add Car') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.branches.index')" :active="request()->routeIs('admin.branches.*')">
+                    {{ __('Manage Branches') }}
                 </x-responsive-nav-link>
             @else
                 <x-responsive-nav-link :href="route('cars.index')" :active="request()->routeIs('cars.index')">
