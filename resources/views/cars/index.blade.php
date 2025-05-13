@@ -50,6 +50,11 @@
             </div>
 
             <!-- Car Grid -->
+            @if($cars->isEmpty())
+                <div class="w-full text-center text-gray-500">
+                    no data available
+                </div>
+            @else
             <div class="flex flex-wrap gap-4">
                 @foreach($cars as $car)
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border">
@@ -73,6 +78,7 @@
                     </div>
                 @endforeach
             </div>
+            @endif
 
             <!-- Pagination -->
             <div class="mt-6">

@@ -66,6 +66,24 @@ class BookingController extends Controller
             return back()->with('error', 'This car is already booked for the selected dates.');
         }
 
+        // Check if the customer has reached the booking limit
+        $customerBookings = Booking::where('user_id', Auth::id())
+            ->where('status', 'approved')
+            ->where(function ($query) use ($validated) {
+                $query->whereBetween('start_date', [$validated['start_date'], $validated['end_date']])
+                    ->orWhereBetween('end_date', [$validated['start_date'], $validated['end_date']])
+                    ->orWhere(function ($q) use ($validated) {
+                        $q->where('start_date', '<=', $validated['start_date'])
+                            ->where('end_date', '>=', $validated['end_date']);
+                    });
+            })
+            ->count();
+
+        if ($customerBookings >= 2) {
+            session()->flash('booking_limit_exceeded', 'You have reached the maximum limit of two bookings for the same rental period.');
+            return back()->with('error', 'You have reached the maximum limit of two bookings for the same rental period.');
+        }
+
         // Calculate total price
         $days = (strtotime($validated['end_date']) - strtotime($validated['start_date'])) / (60 * 60 * 24);
         $totalPrice = $car->daily_rate * $days;

@@ -34,4 +34,32 @@ class Booking extends Model
     {
         return $this->belongsTo(Car::class);
     }
+
+    public function hasOverlappingBookings($startDate, $endDate)
+    {
+        return $this->where('car_id', $this->car_id)
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('start_date', [$startDate, $endDate])
+                    ->orWhereBetween('end_date', [$startDate, $endDate])
+                    ->orWhere(function ($q) use ($startDate, $endDate) {
+                        $q->where('start_date', '<=', $startDate)
+                            ->where('end_date', '>=', $endDate);
+                    });
+            })
+            ->exists();
+    }
+
+    public function countCustomerBookings($userId, $startDate, $endDate)
+    {
+        return $this->where('user_id', $userId)
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('start_date', [$startDate, $endDate])
+                    ->orWhereBetween('end_date', [$startDate, $endDate])
+                    ->orWhere(function ($q) use ($startDate, $endDate) {
+                        $q->where('start_date', '<=', $startDate)
+                            ->where('end_date', '>=', $endDate);
+                    });
+            })
+            ->count();
+    }
 }

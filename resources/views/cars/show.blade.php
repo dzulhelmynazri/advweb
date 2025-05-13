@@ -9,6 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border p-6 flex gap-4 justify-between">
 
+
+
                             <div class="space-y-2">
                                 <h3 class="text-2xl font-bold mb-2">{{ $car->brand }} {{ $car->model }}</h3>
                                 <p><span class="font-medium">Type:</span> {{ $car->carType->name }}</p>
@@ -55,6 +57,12 @@
                             @endif
 
             </div>
+
+            @if(session()->has('booking_limit_exceeded'))
+                    <div class="alert alert-warning" style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 10px; margin-bottom: 15px;">
+                        {{ session('booking_limit_exceeded') }}
+                    </div>
+                @endif
         </div>
     </div>
 
@@ -73,6 +81,14 @@
                 if (endDateInput.value && new Date(endDateInput.value) < minEndDate) {
                     endDateInput.value = minEndDate.toISOString().split('T')[0];
                 }
+            });
+
+            const bookingForm = document.querySelector('form[action="{{ route('bookings.store') }}"]');
+            const warningAlert = document.querySelector('.alert-warning');
+
+            bookingForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+                warningAlert.style.display = 'block'; // Show the warning
             });
         });
     </script>
